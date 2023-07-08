@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
+let todos = ["hello", "yoi"];
 router.get("/", (req,res)=>{
-    res.render('index');
+    res.render('index', {todos});
+})
+
+router.post("/", (req,res) => {
+    let newItem = res.body.todo;
+    todos.push(newItem)
+    res.redirect("/");
 })
 
 module.exports = router;

@@ -5,17 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="\css\index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
     <title>Document</title>
 </head>
 <body>
     <div class="container">
         <div class="box">
-            <span class="icon">
-                <i class="fa-solid fa-calendar"></i>
-            </span>
-            <input class="input" type="text" placeholder="Add task to complete">
+            <form action="/" method="post">
+            <div class="addtodo">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar"></i>
+                </span>
+                <input class="input" name ="todo" type="text" placeholder="Add task to complete">
+                <button type="submit">Add Task</button> 
+            </div>
+            </form>
+            <div class="line"></div>
+            <!-- <div class="todolist" id="addingInList">
+                <% todos.forEach(todo => { %>
+                    <div><%= todo %></div>
+                <% }) %>
+            </div> -->
+            <ul>
+                <% todos.forEach(function(todo) { %>
+                <li><%= todo %></li>
+                <% }); %>
+              </ul>
         </div>
     </div>
+
+    <!-- <script>
+        function addinlist(todos) {
+            var name = document.getElementById('todoInput').value;
+            todos.push(name);
+            console.log(todos);
+            var div = document.getElementById('addingInList');
+            // div.innerHTML = '';
+            // todos.forEach(function(todo) {
+            var newDiv = document.createElement('div');
+            newDiv.innerHTML = todos;
+            div.appendChild(newDiv);
+            // });
+        }
+    </script> -->
+
 </body>
 </html>
