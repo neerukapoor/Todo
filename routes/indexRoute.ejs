@@ -7,7 +7,7 @@ router.get("/", (req,res)=>{
 })
 
 router.post("/", (req,res) => {
-    let newItem = res.body.todo;
+    let newItem = req.body.todo;
     todos.push(newItem)
     res.redirect("/");
 })

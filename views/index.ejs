@@ -16,37 +16,17 @@
                     <i class="fa-solid fa-calendar"></i>
                 </span>
                 <input class="input" name ="todo" type="text" placeholder="Add task to complete">
-                <button type="submit">Add Task</button> 
             </div>
             </form>
             <div class="line"></div>
-            <!-- <div class="todolist" id="addingInList">
-                <% todos.forEach(todo => { %>
-                    <div><%= todo %></div>
-                <% }) %>
-            </div> -->
-            <ul>
-                <% todos.forEach(function(todo) { %>
-                <li><%= todo %></li>
-                <% }); %>
-              </ul>
+            <div class="todolist" id="todo-box">
+                <div class="todolist-items">
+                    <% todos.forEach(function(todo) { %>
+                        <div class="todo-placeholder"><%= todo %></div>
+                    <% }); %>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- <script>
-        function addinlist(todos) {
-            var name = document.getElementById('todoInput').value;
-            todos.push(name);
-            console.log(todos);
-            var div = document.getElementById('addingInList');
-            // div.innerHTML = '';
-            // todos.forEach(function(todo) {
-            var newDiv = document.createElement('div');
-            newDiv.innerHTML = todos;
-            div.appendChild(newDiv);
-            // });
-        }
-    </script> -->
-
 </body>
 </html>

@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+form{
+  width: 100%;
+}
+
 .addtodo{
   display: flex;
   justify-content: center;
@@ -38,6 +42,25 @@
   align-items: center;
   margin-top: 35px;
   font-size: 20px;
+}
+
+.todolist-items{
+  display: grid;
+  gap: 1.1rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.todo-placeholder{
+  width: 85%;
+  height: 110%;
+  background-color: #eaeaea;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#todo-box{
+  overflow: scroll;
 }
 
 .icon {
