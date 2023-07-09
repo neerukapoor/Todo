@@ -52,15 +52,38 @@ form{
 }
 
 .todo-placeholder{
+  margin-top: 10px;
   width: 85%;
-  height: 110%;
-  background-color: #eaeaea;
+  height: 20px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  outline: none;
+  border-radius: 4px;
+  resize: none;
+}
+
+.todo-placeholder::-webkit-scrollbar{
+  width: 0px;
 }
 
 #todo-box{
-  overflow: scroll;
+  overflow: auto;
+}
+
+#todo-box::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+#todo-box::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Background color of the scrollbar track */
+}
+
+#todo-box::-webkit-scrollbar-thumb {
+  background-color: #87878755; /* Color of the scrollbar thumb on hover */
+}
+
+#todo-box::-webkit-scrollbar-thumb:hover {
+  background-color: #797979; /* Color of the scrollbar thumb on hover */
 }
 
 .icon {

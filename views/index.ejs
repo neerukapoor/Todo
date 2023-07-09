@@ -22,7 +22,7 @@
             <div class="todolist" id="todo-box">
                 <div class="todolist-items">
                     <% todos.forEach(function(todo) { %>
-                        <div class="todo-placeholder"><%= todo %></div>
+                        <textarea class="todo-placeholder" readonly><%= todo %></textarea>
                     <% }); %>
                 </div>
             </div>
