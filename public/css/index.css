@@ -106,3 +106,34 @@ form{
   padding-left: 35px;
   font-size: 16px;
 }
+
+.modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 5px;
+  z-index: 10;
+  width: 500px;
+  max-width: 80%;
+  height: 400px;
+  max-height: 80%;
+}
+
+.modal .modal-title {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal .close-button {
+  cursor: none;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
