@@ -12,4 +12,10 @@ router.post("/", (req,res) => {
     res.redirect("/");
 })
 
+router.get("/signup", (req,res) => {
+    res.render('signup', {
+        mySecretKey: process.env.GOOGLE_CLIENT_ID
+    });
+})
+
 module.exports = router;

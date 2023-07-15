@@ -4,6 +4,9 @@ const path =require('path');
 
 const PORT = process.env.PORT || 4600;
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 //Middleware  
 app.set('view engine', 'ejs');
 const bodyParser = require("body-parser");

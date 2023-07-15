@@ -106,6 +106,7 @@ form{
 .icon-edit i{
   font-size: 18px;
   color: rgb(117, 117, 117);
+  cursor: pointer;
 }
 
 .icon i {
