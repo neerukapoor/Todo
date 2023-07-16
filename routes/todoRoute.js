@@ -1,24 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport')
-const app = express()
 
 let todos = ["hello", "yoi"];
 router.get("/", (req,res)=>{
-    res.render('index', {todos});
+    res.render('todo', {todos});
 })
 
 router.post("/", (req,res) => {
     let newItem = req.body.todo;
     todos.push(newItem)
-    res.redirect("/");
+    res.redirect('/todo');
 })
-
-router.get("/signup", (req,res) => {
-    res.render('signup', {
-        mySecretKey: process.env.GOOGLE_CLIENT_ID
-    });
-})
-
 
 module.exports = router;

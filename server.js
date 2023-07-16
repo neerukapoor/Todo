@@ -25,11 +25,10 @@ function isLoggedIn(req, res, next){
 }
 
 require("./auth");
-app.use("/", require("./routes/indexRoute.ejs"));
-// let todos = ["hello", "yoi"];
-// app.get('/', (req, res) => {
-//     res.render('index', {todos})
-// })
+app.use("/todo", require('./routes/todoRoute'));
+app.use("/", require('./routes/indexRoute'));
+app.use("/signup", require('./routes/signupRoute'));
+
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -38,28 +37,12 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope:
-      [ 'email', 'profile' ] }
-));
+app.use('/auth/google', require("./routes/authRoute.js"));
 
-app.get('/auth/google/callback',
-    passport.authenticate( 'google', {
-        successRedirect: '/auth/protected',
-        failureRedirect: '/auth/google/failure'
-}));
-
-app.get('/auth/google/failure', (req, res) => {
-    res.send("something went wrong");
-})
-
-app.get('/auth/protected', isLoggedIn, (req, res) => {
-    let name = req.user.displayName;
-    res.send(`hello ${name}`);
-})
 
 app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`);

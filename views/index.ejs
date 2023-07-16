@@ -4,92 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="\css\index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <title>Document</title>
 </head>
-<body>  
+<body>
     <div class="container">
-        <div class="box">
-            <form action="/" method="post">
-            <div class="addtodo">
-                <span class="icon">
-                    <i class="fa-solid fa-calendar"></i>
-                </span>
-                <input class="input" name ="todo" type="text" placeholder="Add task to complete">
-            </div>
-            </form>
-            <div class="line"></div>
-            <div class="todolist" id="todo-box">
-                <div class="todolist-items">
-                    <% todos.forEach(function(todo) { %>
-                        <div class="todolist-inner-items">
-                            <textarea class="todo-placeholder" readonly><%= todo %></textarea>
-                            <span data-modal-target="#modal" class="icon-edit">
-                                <i class="fa-solid fa-pen"></i>
-                            </span>
-                        </div>
-                    <% }); %>
-                </div>
-            </div>
+        <div class="rectangle">
+            Task Manager
+        </div>
+        <div class="sidebar">
+            yoi
         </div>
     </div>
-    <div class="modal" id="modal">
-        <div class="modal-title"> 
-            <h1>Edit</h1>
-            <button data-close-button class="close-button">&times;</button>
-        </div>
-        <div class="modal-item">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore tempora 
-                odio, nisi eaque ipsam consequuntur fugit omnis exercitationem cumque ad 
-                doloribus, libero, aliquid distinctio! Est quam rem quod sapiente incidunt?</p>
-        </div>
-    </div>
-    <div id="overlay"></div>
-
-    <script>
-
-        const textarea = document.querySelector('.input');
-        textarea.focus();
-
-        const openModalButtons = document.querySelectorAll('[data-modal-target]')
-        const closeModalButtons = document.querySelectorAll('[data-close-button]')
-        const overlay = document.getElementById('overlay')
-
-
-        openModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget)
-            openModal(modal)
-            })
-        })
-        
-        overlay.addEventListener('click', () => {
-            const modals = document.querySelectorAll('.modal.active')
-            modals.forEach(modal => {
-                closeModal(modal)
-            })
-        })
-
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const modal = button.closest('.modal')
-                closeModal(modal)
-            })
-        })
-        
-        function openModal(modal) {
-            if (modal == null) 
-                return
-            modal.classList.add('active')
-            overlay.classList.add('active')
-        }
-
-        function closeModal(modal) {
-            if (modal == null) return
-            modal.classList.remove('active')
-            overlay.classList.remove('active')
-        }
-
-    </script>
 </body>
 </html>
