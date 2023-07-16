@@ -27,7 +27,6 @@ function isLoggedIn(req, res, next){
 require("./auth");
 app.use("/todo", require('./routes/todoRoute'));
 app.use("/", require('./routes/indexRoute'));
-app.use("/signup", require('./routes/signupRoute'));
 
 
 app.set('trust proxy', 1) // trust first proxy

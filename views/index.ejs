@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="\css\index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <title>Document</title>
 </head>
 <body>
@@ -12,8 +13,22 @@
             Task Manager
         </div>
         <div class="sidebar">
-            yoi
+            <div class="signup-container">
+                <span class="icon">
+                    <i class="fa-brands fa-google"></i>
+                </span>
+                <button class="google-button" id="google-login-button">Sign in with Google</button>
+            </div>
         </div>
     </div>
+
+    <script>
+        const googleLoginButton = document.getElementById('google-login-button');
+
+        googleLoginButton.addEventListener('click', function() {
+          window.location.href = '/auth/google';
+        });
+      </script>
+
 </body>
 </html>

@@ -24,7 +24,7 @@
                     <% todos.forEach(function(todo) { %>
                         <div class="todolist-inner-items">
                             <textarea class="todo-placeholder" readonly><%= todo %></textarea>
-                            <span data-modal-target="#modal" class="icon-edit">
+                            <span data-modal-target="#modal" class="icon-edit" onclick="openModal('<%= todo %>')">
                                 <i class="fa-solid fa-pen"></i>
                             </span>
                         </div>
@@ -35,7 +35,7 @@
     </div>
     <div class="modal" id="modal">
         <div class="modal-title"> 
-            <h1>Edit</h1>
+            <h1 contenteditable="true"></h1>
             <button data-close-button class="close-button">&times;</button>
         </div>
         <div class="modal-item">
@@ -54,12 +54,16 @@
         const openModalButtons = document.querySelectorAll('[data-modal-target]')
         const closeModalButtons = document.querySelectorAll('[data-close-button]')
         const overlay = document.getElementById('overlay')
+        const modalTitle = document.querySelector('.modal-title h1');
+        const todos = document.querySelector('.todo-placeholder');
 
 
-        openModalButtons.forEach(button => {
+        openModalButtons.forEach((button, index) => {
             button.addEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget)
-            openModal(modal)
+                // const todoName = button.parentElement.querySelector('textarea').value;
+                const todoName = todos[index].value;
+                modalTitle.textContent = todoName;
+                openModal(todoName, index);
             })
         })
         
@@ -73,13 +77,16 @@
         closeModalButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const modal = button.closest('.modal')
-                closeModal(modal)
+                closeModal(modal);
             })
         })
         
-        function openModal(modal) {
-            if (modal == null) 
-                return
+        function openModal(todoName, index) {
+            const modal = document.getElementById('modal');
+            modalTitle.textContent = todoName;
+            modalTitle.addEventListener('input', () => {
+                updateTodo(index, modalTitle.textContent);
+            });
             modal.classList.add('active')
             overlay.classList.add('active')
         }
@@ -88,6 +95,11 @@
             if (modal == null) return
             modal.classList.remove('active')
             overlay.classList.remove('active')
+        }
+
+        function updateTodo(index, updatedTodo) {
+            todos[index].value = updatedTodo;
+            // You can also update your server or local storage with the updated todo if needed
         }
 
     </script>
