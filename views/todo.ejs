@@ -21,13 +21,15 @@
             <div class="line"></div>
             <div class="todolist" id="todo-box">
                 <div class="todolist-items">
-                    <% todos.forEach(function(todo) { %>
-                        <div class="todolist-inner-items">
-                            <textarea class="todo-placeholder"><%= todo %></textarea>
-                            <span data-modal-target="#modal" class="icon-edit">
-                                <i class="fa-solid fa-pen"></i>
-                            </span>
-                        </div>
+                    <% todoss.forEach(function(todo) { %>
+                        <% todo.todos.forEach(function(x) { %>
+                            <div class="todolist-inner-items">
+                                <textarea class="todo-placeholder"><%= x %></textarea>
+                                <span data-modal-target="#modal" class="icon-edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </span>
+                            </div>                                
+                            <% }) %>
                     <% }); %>
                 </div>
             </div>

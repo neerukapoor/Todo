@@ -1,14 +1,34 @@
 const express = require('express')
 const passport = require('passport');
 var session = require('express-session');
-const app = express()
+const app = express();
 const path =require('path');
+const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 4600;
 
 const dotenv = require('dotenv');
 dotenv.config();
 
+
+mongoose.connect(process.env.MONGOOSE_DB_CONNECTION);
+
+const todoSchema = require("./models/todoModel");
+
+// async function insert() {
+//     try {
+//         await todoSchema.create({
+//             userId: "random",
+//             todos: ["eating", "coding"]
+//         })  
+//     }
+//     catch (e) {
+//         console.log(e.message);
+//     }
+// }
+// insert();
+
+//Middleware
 function isLoggedIn(req, res, next){
     req.user ? next() : res.sendStatus(401)
 }
