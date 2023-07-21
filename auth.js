@@ -1,5 +1,6 @@
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const passport = require('passport');
+const todoSchema = require("./models/todoModel");
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -7,10 +8,12 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:4600/auth/google/callback",
     passReqToCallback   : true
   },
-  function(request, accessToken, refreshToken, profile, done) {
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
+  async function(request, accessToken, refreshToken, profile, done) {
+    await todoSchema.create({ userId: profile.id,
+                              userName: profile.displayName,
+                              todos: ["playing", "laughing"],
+                              emailId: profile.email }
+    );
     console.log(profile);
     return done(null,profile);
   }
@@ -20,6 +23,16 @@ passport.serializeUser((user, done) => {
     done(null, user);
 })
 
-passport.deserializeUser((user, done) => {
-    done(null, user);
+passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await todoSchema.findOne({userId: id});
+
+      if(!user) {
+        return done(new Error("User not found"), null);
+      }
+
+      done(null, user);
+    } catch (e) {
+      done(err, null);
+    }
 })

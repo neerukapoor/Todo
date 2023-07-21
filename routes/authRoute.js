@@ -7,11 +7,15 @@ router.get('/',
       [ 'email', 'profile' ] }
 ));
 
-router.get('/callback',
-    passport.authenticate( 'google', {
-        successRedirect: '/todo',
-        failureRedirect: '/auth/google/failure'
-}));
+router.get('/callback', (req, res, next) => {
+    passport.authenticate( 'google', (err, user, info) => {
+        if(err)
+            return next(err);
+        if(!user)
+            return res.redirect('/auth/google/failure');
+        return res.redirect('/todo?id=' + user.id);
+    })(req, res, next);
+});
 
 router.get('/failure', (req, res) => {
     res.send("something went wrong");

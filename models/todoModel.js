@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
     userId: String,
+    userName: String,
+    emailId: String,
     todos: [String],
     createdAt: {
         type: Date,

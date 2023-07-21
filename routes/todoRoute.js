@@ -5,8 +5,12 @@ const todoSchema = require('../models/todoModel');
 
 router.get("/", async (req,res)=>{
     try {
-        const userId = "cxn";
-        const todoss = await todoSchema.find({userId});
+        const userName = "Neeru Kapoor";
+        const profileId = req.query.id;
+        console.log("here");
+        console.log("profile id is: " + profileId);
+        const todoss = await todoSchema.find({userName});
+        console.log(todoss.userName);
         res.render('todo', {todoss});
         // res.status(500).send('Server Error');
     }
