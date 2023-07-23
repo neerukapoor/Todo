@@ -2,26 +2,25 @@ const express = require('express');
 const router = express.Router();
 const todoSchema = require('../models/todoModel');
 
-
 router.get("/", async (req,res)=>{
     try {
-        const userName = "Neeru Kapoor";
-        const profileId = req.query.id;
-        console.log("here");
-        console.log("profile id is: " + profileId);
-        const todoss = await todoSchema.find({userName});
-        console.log(todoss.userName);
-        res.render('todo', {todoss});
-        // res.status(500).send('Server Error');
+        const userId = req.query.id;
+        const todosByUserId = await todoSchema.findOne({userId});
+        if(!todosByUserId) {
+            let todoListOfUser = [];
+            res.render('todo', {todoListOfUser});
+        }
+        else {
+            todoListOfUser = todosByUserId.todos;
+            res.render('todo', {todoListOfUser});
+        }
     }
     catch (e) {
         console.error(e)
     }
 })
 
-router.post("/", (req,res) => {
-    let newItem = req.body.todo;
-    todos.push(newItem)
+router.post("/", async (req,res) => {
     res.redirect('/todo');
 })
 

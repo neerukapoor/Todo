@@ -9,12 +9,20 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true
   },
   async function(request, accessToken, refreshToken, profile, done) {
-    await todoSchema.create({ userId: profile.id,
-                              userName: profile.displayName,
-                              todos: ["playing", "laughing"],
-                              emailId: profile.email }
-    );
-    console.log(profile);
+    todoSchema.findOne({userId: profile.id}).then((currentUser) => {
+      if(currentUser) {
+        console.log("user already signed up " + currentUser )
+      }
+      else
+      {      
+        todoSchema.create({ userId: profile.id,
+                                  userName: profile.displayName,
+                                  todos: ["playing1", "laughing1"],
+                                  emailId: profile.email }
+        );
+        console.log(profile);
+      }
+    })
     return done(null,profile);
   }
 ));
