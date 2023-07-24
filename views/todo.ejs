@@ -10,24 +10,24 @@
 <body>  
     <div class="container">
         <div class="box">
-            <form action="/todo" method="post">
+            <form action="/todo?id=<%= todosByUserId.userId %>" method="post">
             <div class="addtodo">
                 <span class="icon">
                     <i class="fa-solid fa-calendar"></i>
                 </span>
                 <input class="input" name ="todo" type="text" placeholder="Add task to complete">
             </div>
-            </form>
+            </form> 
             <div class="line"></div>
             <div class="todolist" id="todo-box">
                 <div class="todolist-items">
-                    <% todoListOfUser.forEach(function(todo) { %>
-                            <div class="todolist-inner-items">
-                                <textarea class="todo-placeholder"><%= todo %></textarea>
-                                <span data-modal-target="#modal" class="icon-edit">
-                                    <i class="fa-solid fa-pen"></i>
-                                </span>
-                            </div>                                
+                    <% todosByUserId.todos.forEach(function(todo) { %>
+                                <div class="todolist-inner-items">
+                                    <textarea class="todo-placeholder"><%= todo %></textarea>
+                                    <span data-modal-target="#modal" class="icon-edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </span>
+                                </div>                                
                     <% }); %>
                 </div>
             </div>
@@ -39,7 +39,8 @@
             <button data-close-button class="close-button">&times;</button>
         </div>
         <div class="modal-item">
-            <textarea></textarea>
+            <p class="Note-Heading">Note</p>
+            <textarea class="modal-textarea"></textarea>
         </div>
     </div>
     <div id="overlay"></div>

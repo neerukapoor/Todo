@@ -177,3 +177,17 @@ form{
   opacity: 1;
   pointer-events: all;
 }
+
+.modal-textarea {
+  width: 95%;
+  height: 210px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  border-radius: 4px;
+  resize: none;
+}
+
+.Note-Heading{
+  font-size: 20px;
+}

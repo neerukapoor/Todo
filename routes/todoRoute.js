@@ -6,14 +6,15 @@ router.get("/", async (req,res)=>{
     try {
         const userId = req.query.id;
         const todosByUserId = await todoSchema.findOne({userId});
-        if(!todosByUserId) {
-            let todoListOfUser = [];
-            res.render('todo', {todoListOfUser});
-        }
-        else {
-            todoListOfUser = todosByUserId.todos;
-            res.render('todo', {todoListOfUser});
-        }
+        console.log("todos user id:  "+todosByUserId);
+        // if(!todosByUserId) {
+            // let todoListOfUser = [];
+            res.render('todo', {todosByUserId});
+        // }
+        // else {
+            // todoListOfUser = todosByUserId.todos;
+            // res.render('todo', {todosByUserId});
+        //}
     }
     catch (e) {
         console.error(e)
@@ -21,7 +22,12 @@ router.get("/", async (req,res)=>{
 })
 
 router.post("/", async (req,res) => {
-    res.redirect('/todo');
+    const id = req.query.id;
+    const todo = req.body.todo;
+    const result = await todoSchema.findOne({userId: id});
+    result.todos.push(todo);
+    result.save();
+    res.redirect(`/todo?id=${id}`);
 })
 
 module.exports = router;
