@@ -13,7 +13,18 @@ const todoSchema = new mongoose.Schema({
     updatedAt: {
         type: Date,
         default: () => Date.now()
-    }
+    },
+    completedTodoList: [String]
 })
 
-module.exports = mongoose.model('Todo', todoSchema);
+// const completedSchema = new mongoose.Schema({
+//     userId: String,
+//     completedTodos: [String]
+// })
+
+const Todo = mongoose.model('Todo', todoSchema)
+// const CompletedTodos = mongoose.model('Completed', completedSchema)  
+
+
+// module.exports = mongoose.model('Todo', todoSchema);
+module.exports = {Todo};

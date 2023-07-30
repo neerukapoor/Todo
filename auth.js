@@ -1,6 +1,7 @@
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 const passport = require('passport');
-const todoSchema = require("./models/todoModel");
+// const todoSchema = require("./models/todoModel");
+const {Todo} = require("./models/todoModel");
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -9,20 +10,26 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true
   },
   async function(request, accessToken, refreshToken, profile, done) {
-    todoSchema.findOne({userId: profile.id}).then((currentUser) => {
+
+    Todo.findOne({userId: profile.id}).then((currentUser) => {
       if(currentUser) {
         console.log("user already signed up " + currentUser )
       }
       else
       {      
-        todoSchema.create({ userId: profile.id,
+        Todo.create({ userId: profile.id,
                                   userName: profile.displayName,
                                   todos: ["playing1", "laughing1"],
-                                  emailId: profile.email }
+                                  emailId: profile.email,
+                                  completedTodoList: [] }
         );
+        // CompletedTodos.create({ userId: profile.id, 
+        //                         completedTodos: [] }
+        // );
         console.log(profile);
       }
     })
+
     return done(null,profile);
   }
 ));
@@ -33,7 +40,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     try {
-      const user = await todoSchema.findOne({userId: id});
+      const user = await Todo.findOne({userId: id});
 
       if(!user) {
         return done(new Error("User not found"), null);

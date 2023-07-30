@@ -13,20 +13,7 @@ dotenv.config();
 
 mongoose.connect(process.env.MONGOOSE_DB_CONNECTION);
 
-const todoSchema = require("./models/todoModel");
-
-// async function insert() {
-//     try {
-//         await todoSchema.create({
-//             userId: "random",
-//             todos: ["eating", "coding"]
-//         })  
-//     }
-//     catch (e) {
-//         console.log(e.message);
-//     }
-// }
-// insert();
+const {Todo} = require("./models/todoModel");
 
 //Middleware
 function isLoggedIn(req, res, next){
@@ -37,6 +24,7 @@ function isLoggedIn(req, res, next){
 app.set('view engine', 'ejs');
 const bodyParser = require("body-parser");
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -22,17 +22,26 @@
             <div class="todolist" id="todo-box">
                 <div class="todolist-items">
                     <% todosByUserId.todos.forEach(function(todo) { %>
-                                <div class="todolist-inner-items">
-                                    <textarea class="todo-placeholder"><%= todo %></textarea>
-                                    <span data-modal-target="#modal" class="icon-edit">
-                                        <i class="fa-solid fa-pen"></i>
-                                    </span>
-                                </div>                                
-                    <% }); %>
+                        <div class="todolist-inner-items">
+                                <span data-completed-target="#completed-list" id="user-data"
+                                       data-user-id="<%= todosByUserId.userId %>" class="icon-complete">
+                                    <i class="fa-regular fa-circle"></i>
+                                </span>
+                                <textarea class="todo-placeholder"><%= todo %></textarea>
+                                <span data-modal-target="#modal" class="icon-edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </span>
+                        </div>
+                    <% }); %>               
                 </div>
             </div>
         </div>
     </div>
+    
+    <form action="/todo/completedList?id=<%= todosByUserId.userId %>" method="post">
+        <button class="completed-list-bt">Completed List</button>
+    </form>
+
     <div class="modal" id="modal">
         <div class="modal-title"> 
             <h1 contenteditable="true"></h1>
@@ -55,6 +64,34 @@
         const overlay = document.getElementById('overlay')
         const modalTitle = document.querySelector('.modal-title h1');
 
+        const completedBtIcon = document.querySelectorAll('[data-completed-target]')
+        const userDataElement = document.getElementById('user-data');
+        const userId = userDataElement.dataset.userId;
+
+        completedBtIcon.forEach((button, index) => {
+            button.addEventListener('click', async(event) => {
+                const todoName = button.nextElementSibling;
+                const todoValue = todoName.value;
+                
+                console.log(todoValue);
+                console.log(userId);
+                const response = await fetch(`/todo/complete/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ todo: todoValue }),
+                });
+
+                if (response.ok) {
+                const data = await response.json();
+                console.log('Completed Todos:', data.completedTodos);
+                } else {
+                console.error('Failed to complete todo.');
+                }
+
+            })
+        })
 
         openModalButtons.forEach((button, index) => {
             button.addEventListener('click', () => {
