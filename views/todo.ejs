@@ -38,7 +38,7 @@
         </div>
     </div>
     
-    <form action="/todo/completedList?id=<%= todosByUserId.userId %>" method="post">
+    <form action="/todo/completedList" method="get">
         <button class="completed-list-bt">Completed List</button>
     </form>
 
@@ -72,9 +72,7 @@
             button.addEventListener('click', async(event) => {
                 const todoName = button.nextElementSibling;
                 const todoValue = todoName.value;
-                
-                console.log(todoValue);
-                console.log(userId);
+
                 const response = await fetch(`/todo/complete/${userId}`, {
                 method: 'POST',
                 headers: {
@@ -89,7 +87,7 @@
                 } else {
                 console.error('Failed to complete todo.');
                 }
-
+                location.reload();
             })
         })
 

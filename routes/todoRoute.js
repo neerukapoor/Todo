@@ -30,13 +30,19 @@ router.post("/complete/:id", async (req,res) => {
     console.log(completedTodo);
     console.log(userId)
     const todosByUserId = await Todo.findOne({userId});
+
+    const toRemoveFromTodosList = todosByUserId.todos.indexOf(completedTodo);
+    console.log(toRemoveFromTodosList);
+    todosByUserId.todos.splice(toRemoveFromTodosList, 1);
+
     todosByUserId.completedTodoList.push(completedTodo);
     todosByUserId.save();
     res.json({ success: true });
 })
 
-router.post("/random", async (req,res) => {
-    res.send("asdhf");
+router.get("/completedList", async (req,res) => { 
+    res.send("yoi");
 })
+
 
 module.exports = router;
