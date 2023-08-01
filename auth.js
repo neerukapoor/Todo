@@ -23,9 +23,6 @@ passport.use(new GoogleStrategy({
                                   emailId: profile.email,
                                   completedTodoList: [] }
         );
-        // CompletedTodos.create({ userId: profile.id, 
-        //                         completedTodos: [] }
-        // );
         console.log(profile);
       }
     })

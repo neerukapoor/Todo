@@ -5,10 +5,8 @@ const {Todo} = require('../models/todoModel');
 router.get("/", async (req,res)=>{
     try {
         const userId = req.query.id;
-        const todosByUserId = await Todo.findOne({userId});
-        // const completedTodosByUserId = await CompletedTodos.findOne({userId});
-        console.log("todos user id:  "+todosByUserId);
-            res.render('todo', {todosByUserId});
+        const todoByUserId = await Todo.findOne({userId});
+        res.render('todo', {todoByUserId});
     }
     catch (e) {
         console.error(e)
@@ -41,7 +39,9 @@ router.post("/complete/:id", async (req,res) => {
 })
 
 router.get("/completedList", async (req,res) => { 
-    res.send("yoi");
+    const userId = req.query.id;
+    const userById = await Todo.findOne({userId});
+    res.render('completedList', {userById});
 })
 
 

@@ -10,7 +10,7 @@
 <body>  
     <div class="container">
         <div class="box">
-            <form action="/todo?id=<%= todosByUserId.userId %>" method="post">
+            <form action="/todo?id=<%= todoByUserId.userId %>" method="post">
             <div class="addtodo">
                 <span class="icon">
                     <i class="fa-solid fa-calendar"></i>
@@ -21,10 +21,10 @@
             <div class="line"></div>
             <div class="todolist" id="todo-box">
                 <div class="todolist-items">
-                    <% todosByUserId.todos.forEach(function(todo) { %>
+                    <% todoByUserId.todos.forEach(function(todo) { %>
                         <div class="todolist-inner-items">
                                 <span data-completed-target="#completed-list" id="user-data"
-                                       data-user-id="<%= todosByUserId.userId %>" class="icon-complete">
+                                       data-user-id="<%= todoByUserId.userId %>" class="icon-complete">
                                     <i class="fa-regular fa-circle"></i>
                                 </span>
                                 <textarea class="todo-placeholder"><%= todo %></textarea>
@@ -38,9 +38,12 @@
         </div>
     </div>
     
-    <form action="/todo/completedList" method="get">
-        <button class="completed-list-bt">Completed List</button>
-    </form>
+    <!-- <form action="/todo/completedList" method="get"> -->
+    <div>
+        <input type="hidden" name="id" value="<%= todoByUserId.userId %>">
+        <button data-completed-list-modal-target="#completed-list-modal" class="completed-list-bt">Completed List</button>
+    </div>
+    <!-- </form> -->
 
     <div class="modal" id="modal">
         <div class="modal-title"> 
@@ -54,6 +57,11 @@
     </div>
     <div id="overlay"></div>
 
+    <div class="completed-list-modal">
+        idhar
+        <button data-completed-list-close-button class="close-button">&times;</button>
+    </div>
+
     <script>
 
         const textarea = document.querySelector('.input');
@@ -63,6 +71,16 @@
         const closeModalButtons = document.querySelectorAll('[data-close-button]')
         const overlay = document.getElementById('overlay')
         const modalTitle = document.querySelector('.modal-title h1');
+
+        // const openCompletedListModalButtons = document.querySelectorAll('[completed-list-modal]')
+        // const closeCompletedListModalButtons = document.querySelectorAll('[data-completed-list-close-button]')
+
+        // openCompletedListModalButtons.forEach((button) => {
+        //     button.addEventListener('click', async () => {
+        //         const modal = document.querySelector(button.dataset.modalTarget)
+        //         openModalForCompletedList(modal);
+        //     })
+        // })
 
         const completedBtIcon = document.querySelectorAll('[data-completed-target]')
         const userDataElement = document.getElementById('user-data');
