@@ -55,12 +55,22 @@
             <textarea class="modal-textarea"></textarea>
         </div>
     </div>
-    <div id="overlay"></div>
 
-    <div class="completed-list-modal">
-        idhar
-        <button data-completed-list-close-button class="close-button">&times;</button>
+    <div class="completed-list-modal" id="completed-list-modal">
+        <div class="completed-list-header">
+            <div class="completed-list-heading">Completed List</div>
+            <button data-completed-list-close-button class="close-button">&times;</button>
+        </div>
+        <div class="completed-list-container">
+            <% todoByUserId.completedTodoList.forEach(function(completedtodo) { %>
+                <div class="completed-list-inner">
+                        <div class="completed-list-placeholder"><%= completedtodo %></div>
+                </div>
+            <% }); %>  
+        </div>
     </div>
+
+    <div id="overlay"></div>
 
     <script>
 
@@ -72,15 +82,30 @@
         const overlay = document.getElementById('overlay')
         const modalTitle = document.querySelector('.modal-title h1');
 
-        // const openCompletedListModalButtons = document.querySelectorAll('[completed-list-modal]')
-        // const closeCompletedListModalButtons = document.querySelectorAll('[data-completed-list-close-button]')
+        const openCompletedListModalButtons = document.querySelectorAll('[data-completed-list-modal-target]')
+        const closeCompletedListModalButtons = document.querySelectorAll('[data-completed-list-close-button]')
 
-        // openCompletedListModalButtons.forEach((button) => {
-        //     button.addEventListener('click', async () => {
-        //         const modal = document.querySelector(button.dataset.modalTarget)
-        //         openModalForCompletedList(modal);
-        //     })
-        // })
+        openCompletedListModalButtons.forEach((button) => {
+            button.addEventListener('click', async () => {
+                const modal = document.getElementById("completed-list-modal");
+                modal.classList.add('active');
+            })
+        })
+
+        
+        overlay.addEventListener('click', () => {
+            const modals = document.querySelectorAll('.completed-list-modal.active')
+            modals.forEach(modal => {
+                modal.classList.remove('active');
+            })
+        })
+
+        closeCompletedListModalButtons.forEach((button) => {
+            button.addEventListener('click', async () => {
+                const modal = document.getElementById("completed-list-modal");
+                modal.classList.remove('active');
+            })
+        })
 
         const completedBtIcon = document.querySelectorAll('[data-completed-target]')
         const userDataElement = document.getElementById('user-data');

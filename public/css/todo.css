@@ -237,3 +237,36 @@ form{
 .completed-list-modal.active{
   transform: translate(-50%, -50%) scale(1);
 }
+
+.completed-list-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.completed-list-heading{
+  font-size: 23px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.close-button{
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.completed-list-container{
+  overflow: scroll;
+  height: 92%;
+  width: 100%;
+}
+
+.completed-list-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.completed-list-placeholder{
+  font-size: 20px;
+  margin: 10px;
+}
