@@ -38,11 +38,4 @@ router.post("/complete/:id", async (req,res) => {
     res.json({ success: true });
 })
 
-router.get("/completedList", async (req,res) => { 
-    const userId = req.query.id;
-    const userById = await Todo.findOne({userId});
-    res.render('completedList', {userById});
-})
-
-
 module.exports = router;
