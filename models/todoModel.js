@@ -4,7 +4,10 @@ const todoSchema = new mongoose.Schema({
     userId: String,
     userName: String,
     emailId: String,
-    todos: [String],
+    todos: [{
+        todoItem: String,
+        todoNotes: String
+    }],
     createdAt: {
         type: Date,
         immutable: true,
@@ -14,17 +17,10 @@ const todoSchema = new mongoose.Schema({
         type: Date,
         default: () => Date.now()
     },
-    completedTodoList: [String]
+    completedTodoList: [String],
+    notes: String
 })
 
-// const completedSchema = new mongoose.Schema({
-//     userId: String,
-//     completedTodos: [String]
-// })
-
 const Todo = mongoose.model('Todo', todoSchema)
-// const CompletedTodos = mongoose.model('Completed', completedSchema)  
 
-
-// module.exports = mongoose.model('Todo', todoSchema);
 module.exports = {Todo};

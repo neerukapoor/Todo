@@ -19,7 +19,7 @@ passport.use(new GoogleStrategy({
       {      
         Todo.create({ userId: profile.id,
                                   userName: profile.displayName,
-                                  todos: ["playing1", "laughing1"],
+                                  todos: [{todoItem:"playing1" , todoNotes:""}],
                                   emailId: profile.email,
                                   completedTodoList: [] }
         );

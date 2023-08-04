@@ -27,7 +27,7 @@
                                        data-user-id="<%= todoByUserId.userId %>" class="icon-complete">
                                     <i class="fa-regular fa-circle"></i>
                                 </span>
-                                <textarea class="todo-placeholder"><%= todo %></textarea>
+                                <textarea class="todo-placeholder"><%= todo.todoItem %></textarea>
                                 <span data-modal-target="#modal" class="icon-edit">
                                     <i class="fa-solid fa-pen"></i>
                                 </span>
@@ -38,12 +38,11 @@
         </div>
     </div>
     
-    <!-- <form action="/todo/completedList" method="get"> -->
+
     <div>
         <input type="hidden" name="id" value="<%= todoByUserId.userId %>">
         <button data-completed-list-modal-target="#completed-list-modal" class="completed-list-bt">Completed List</button>
     </div>
-    <!-- </form> -->
 
     <div class="modal" id="modal">
         <div class="modal-title"> 
@@ -52,7 +51,12 @@
         </div>
         <div class="modal-item">
             <p class="Note-Heading">Note</p>
-            <textarea class="modal-textarea"></textarea>
+            <form action="todo/saveNotes?id=<%= todoByUserId.userId %>" method="post">
+                <div class="notes-section">
+                    <textarea class="modal-textarea" name="noteTextarea"></textarea>
+                    <button class="notes-button">Save</button> 
+                </div>
+            </form>
         </div>
     </div>
 

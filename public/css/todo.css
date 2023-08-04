@@ -196,7 +196,7 @@ form{
 
 .modal-textarea {
   width: 95%;
-  height: 210px;
+  height: 170px;
   padding: 10px;
   border: 1px solid #ccc;
   outline: none;
@@ -269,4 +269,22 @@ form{
 .completed-list-placeholder{
   font-size: 20px;
   margin: 10px;
+}
+
+.notes-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notes-button{
+  cursor: pointer;
+  border: 0.5px black;
+  padding: 10px;
+  margin-top: 8px;
+  background: rgb(89, 211, 89);
+  color: white;
+  font-size: 16px;
+  border: 1px solid black;
+  font-weight: bold;
 }
