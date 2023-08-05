@@ -53,7 +53,7 @@
             <p class="Note-Heading">Note</p>
             <form action="todo/saveNotes?id=<%= todoByUserId.userId %>" method="post">
                 <div class="notes-section">
-                    <textarea class="modal-textarea" name="noteTextarea"></textarea>
+                    <textarea class="modal-textarea" name="noteTextarea"><%= todoByUserId.todos.todoNotes %></textarea>
                     <button class="notes-button">Save</button> 
                 </div>
             </form>

@@ -4,8 +4,9 @@ const {Todo} = require('../models/todoModel');
 
 router.get("/", async (req, res)=>{
     try {
-        const userId = req.query.id;
-        const todoByUserId = await Todo.findOne({userId});
+        const id = req.query.id;
+        const todoByUserId = await Todo.findOne({userId: id});
+        console.log("tring here " + todoByUserId.todos.todoNotes);
         res.render('todo', {todoByUserId});
     }
     catch (e) {
@@ -17,7 +18,7 @@ router.post("/", async (req,res) => {
     const id = req.query.id;
     const todo = req.body.todo;
     const result = await Todo.findOne({userId: id});
-    result.todos.push({todoItem:todo,todoNotes:""});
+    result.todos.push({todoItem:todo,todoNotes:"testing note"});
     result.save();
     res.redirect(`/todo?id=${id}`);
 })
@@ -43,13 +44,19 @@ router.post("/complete/:id", async (req, res) => {
 
 router.post("/saveNotes", async(req, res) => {
     const id = req.query.id;
-    // const completedTodo = req.body.todo; //work on this
-    const todoByUserId = await Todo.findOne({userId});
+    console.log(id);
+    const completedTodo = req.body.todo;
+    console.log("yaha-" + completedTodo)
+    const todoByUserId = await Todo.findOne({userId: id});
     const textData = req.body.noteTextarea;
-    todoByUserId.todos.findIndex(
-        (todo) => todo.todoItem === completedTodo
-    )
-    console.log(textData);
+    // const userNotesArea = todoByUserId.todos.findIndex(
+    //     (todo) => todo.todoItem === completedTodo
+    // )
+    // console.log(userNotesArea)
+    // console.log("pehle " + userNotesArea.todoNotes);
+    // userNotesArea.todoNotes = completedTodo;
+    // console.log("baad me " + userNotesArea.todoNotes);
+    // todoByUserId.save();
     res.redirect(`/todo?id=${id}`);
 })
 
