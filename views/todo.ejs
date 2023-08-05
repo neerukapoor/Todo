@@ -85,6 +85,7 @@
         const closeModalButtons = document.querySelectorAll('[data-close-button]')
         const overlay = document.getElementById('overlay')
         const modalTitle = document.querySelector('.modal-title h1');
+        const saveButtonforNotes = document.getElementById('notes-button')
 
         const openCompletedListModalButtons = document.querySelectorAll('[data-completed-list-modal-target]')
         const closeCompletedListModalButtons = document.querySelectorAll('[data-completed-list-close-button]')
@@ -171,6 +172,17 @@
             modal.classList.remove('active')
             overlay.classList.remove('active')
         }
+
+        saveButtonforNotes.addEventListener('click', async () => {
+            const heading = modalTitle.textContent;
+            const response = await fetch(`/todo/saveNotes?id=${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ todo: todoValue }),
+                });
+        })
 
     </script>
 </body>
