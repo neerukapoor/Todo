@@ -17,8 +17,7 @@ const todoSchema = new mongoose.Schema({
         type: Date,
         default: () => Date.now()
     },
-    completedTodoList: [String],
-    notes: String
+    completedTodoList: [String]
 })
 
 const Todo = mongoose.model('Todo', todoSchema)

@@ -45,17 +45,13 @@ router.post("/saveNotes/:id", async(req, res) => {
     const id = req.params.id;
     console.log(id);
     const todoValue = req.body.todo;
-    console.log("yaha- " + todoValue)
     const todoByUserId = await Todo.findOne({userId: id});
-    const textData = req.body.noteTextarea;
-    console.log("asdf " + textData)
+    const textData = req.body.textContent;
+    console.log("textcontent: " + textData)
     const userNotesArea = todoByUserId.todos.findIndex(
         (todo) => todo.todoItem === todoValue
     )
-    console.log(userNotesArea)
-    console.log("pehle " + userNotesArea.todoNotes);
-    // userNotesArea.todoNotes = textData;
-    // console.log("baad me " + userNotesArea.todoNotes);
+    todoByUserId.todos[userNotesArea].todoNotes = textData;
     todoByUserId.save();
     res.redirect(`/todo?id=${id}`);
 })
