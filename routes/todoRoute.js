@@ -6,7 +6,6 @@ router.get("/", async (req, res)=>{
     try {
         const id = req.query.id;
         const todoByUserId = await Todo.findOne({userId: id});
-        console.log("tring here " + todoByUserId.todos.todoNotes);
         res.render('todo', {todoByUserId});
     }
     catch (e) {
@@ -42,21 +41,22 @@ router.post("/complete/:id", async (req, res) => {
     res.json({ success: true });
 })
 
-router.post("/saveNotes", async(req, res) => {
-    const id = req.query.id;
+router.post("/saveNotes/:id", async(req, res) => {
+    const id = req.params.id;
     console.log(id);
-    const completedTodo = req.body.todo;
-    console.log("yaha-" + completedTodo)
+    const todoValue = req.body.todo;
+    console.log("yaha- " + todoValue)
     const todoByUserId = await Todo.findOne({userId: id});
     const textData = req.body.noteTextarea;
-    // const userNotesArea = todoByUserId.todos.findIndex(
-    //     (todo) => todo.todoItem === completedTodo
-    // )
-    // console.log(userNotesArea)
-    // console.log("pehle " + userNotesArea.todoNotes);
-    // userNotesArea.todoNotes = completedTodo;
+    console.log("asdf " + textData)
+    const userNotesArea = todoByUserId.todos.findIndex(
+        (todo) => todo.todoItem === todoValue
+    )
+    console.log(userNotesArea)
+    console.log("pehle " + userNotesArea.todoNotes);
+    // userNotesArea.todoNotes = textData;
     // console.log("baad me " + userNotesArea.todoNotes);
-    // todoByUserId.save();
+    todoByUserId.save();
     res.redirect(`/todo?id=${id}`);
 })
 

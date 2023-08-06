@@ -51,12 +51,10 @@
         </div>
         <div class="modal-item">
             <p class="Note-Heading">Note</p>
-            <form action="todo/saveNotes?id=<%= todoByUserId.userId %>" method="post">
-                <div class="notes-section">
-                    <textarea class="modal-textarea" name="noteTextarea"><%= todoByUserId.todos.todoNotes %></textarea>
-                    <button class="notes-button">Save</button> 
-                </div>
-            </form>
+            <div class="notes-section">
+                <textarea class="modal-textarea" name="noteTextarea"><%= todoByUserId.todos.todoNotes %></textarea>
+                <button class="notes-button" id="notes-button">Save</button> 
+            </div>
         </div>
     </div>
 
@@ -136,7 +134,7 @@
                 console.error('Failed to complete todo.');
                 }
                 location.reload();
-            })
+            })  
         })
 
         openModalButtons.forEach((button, index) => {
@@ -175,14 +173,21 @@
 
         saveButtonforNotes.addEventListener('click', async () => {
             const heading = modalTitle.textContent;
-            const response = await fetch(`/todo/saveNotes?id=${userId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ todo: todoValue }),
-                });
-        })
+            console.log("writing here: " + heading);
+
+            try {
+                const response = await fetch(`/todo/saveNotes/${userId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ todo: heading }),
+                    });
+                    location.reload();
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }       
+        });
 
     </script>
 </body>
