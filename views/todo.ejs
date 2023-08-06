@@ -52,7 +52,7 @@
         <div class="modal-item">
             <p class="Note-Heading">Note</p>
             <div class="notes-section">
-                <textarea class="modal-textarea" id="noteTextarea"><%= todoByUserId.todos[1].todoNotes %></textarea>
+                <textarea class="modal-textarea" id="noteTextarea"></textarea>
                 <button class="notes-button" id="notes-button">Save</button> 
             </div>
         </div>
@@ -162,6 +162,9 @@
         function openModal(todoName, index) {
             const modal = document.getElementById('modal');
             modalTitle.textContent = todoName;
+            // var todoNotesVariable = "<%= todoByUserId.todos[" + index + "] %>";
+            // console.log("printing here" + todoNotesVariable)
+            // noteTextarea.value = todoNotes;
             modal.classList.add('active')
             overlay.classList.add('active')
         }
